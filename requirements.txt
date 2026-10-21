@@ -1,0 +1,24 @@
+# Project Chrysalis: runtime + test dependencies for BOTH editions
+# (core prototype in ./app and the Google Cloud Agent Platform edition in ./agent_platform_version).
+#
+# Both editions ship a top-level package named `app`, so they are run from source rather than
+# pip-installed side by side:   pip install -r requirements.txt
+google-adk>=2.9.0
+google-genai>=2.20.0
+google-cloud-aiplatform>=1.120.0
+google-cloud-bigquery>=3.20.0
+google-cloud-logging>=3.10.0
+google-cloud-monitoring>=2.20.0
+google-cloud-kms>=3.10.0
+fastapi>=0.118.0
+uvicorn>=0.35.0
+fakeredis>=2.20.0
+duckdb>=1.0.0
+pydantic>=2.10.0
+httpx>=0.28.0
+numpy>=1.26.0
+opentelemetry-api>=1.30.0
+opentelemetry-sdk>=1.30.0
+pytest>=8.0.0
+pytest-asyncio>=0.24.0
+cryptography>=42.0.0

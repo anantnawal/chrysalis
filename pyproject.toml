@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-chrysalis"
+version = "2.0.0"
+description = "Self-Evolving Autonomous Resiliency & FinOps Engine built with Google ADK 2.0 and Gemini"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+dependencies = [
+    "google-adk>=2.9.0",
+    "google-genai>=1.40.0",
+    "google-cloud-aiplatform>=1.120.0",
+    "fastapi>=0.118.0",
+    "uvicorn>=0.35.0",
+    "fakeredis>=2.20.0",
+    "duckdb>=1.0.0",
+    "pydantic>=2.10.0",
+    "httpx>=0.28.0",
+    "numpy>=1.26.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "opentelemetry-api>=1.30.0",
+    "opentelemetry-sdk>=1.30.0",
+]
+
+[tool.setuptools.packages.find]
+# Explicit discovery: ship only the core `app` package (flat-layout auto-discovery
+# would otherwise fail because `tests/`, `docs/` and `agent_platform_version/` sit alongside it).
+include = ["app*"]
+
+[tool.setuptools.package-data]
+"app.target_env" = ["static/*.html"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "black",
+    "flake8",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+norecursedirs = ["original", "oriignal", "agent_platform_version", "Agent platform version", ".venv"]
+asyncio_mode = "strict"
+filterwarnings = [
+    # Third-party (google-adk) internal notices that are not actionable from this codebase
+    "ignore:BaseAgentConfig is deprecated:DeprecationWarning",
+    "ignore:.*JSON_SCHEMA_FOR_FUNC_DECL is enabled:UserWarning",
+]
+

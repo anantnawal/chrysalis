@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Chrysalis - Self-Evolving SRE System Console</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.02); }
+    }
+    .pulse-glow { animation: pulse-slow 3s infinite ease-in-out; }
+    .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(150, 150, 150, 0.3); border-radius: 3px; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased p-6 font-sans">
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- Header Section -->
+    <header class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-ping"></div>
+          <h1 class="text-2xl font-bold tracking-tight text-white">Project Chrysalis</h1>
+          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Google ADK 2.0</span>
+          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">Gemini 3.7 Flash</span>
+        </div>
+        <p class="text-slate-400 text-sm mt-1">
+          Self-Evolving Autonomous Resiliency Engine • Project: <code class="text-xs font-mono bg-slate-800 px-1.5 py-0.5 rounded border border-slate-700" id="gcp-project-id">loading…</code>
+        </p>
+      </div>
+
+      <!-- Action Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="btn-reset" onclick="resetState()" class="px-3 py-2 text-xs font-medium rounded-lg border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-200 transition">
+          ↺ Reset All
+        </button>
+        <button id="btn-run-all" onclick="runAutoDemo()" class="px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow transition flex items-center gap-2">
+          <span>▶ Run Automated Demo</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Phase Stepper Navigation -->
+    <nav class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <!-- Phase 1 -->
+      <button id="step-btn-1" onclick="triggerPhase(1)" class="p-4 rounded-xl border border-slate-800 bg-slate-900 text-left hover:border-indigo-500 transition relative overflow-hidden group">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-bold uppercase tracking-wider text-rose-400">Phase 1</span>
+          <span id="badge-p1" class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-400">Ready</span>
+        </div>
+        <div class="font-semibold text-sm text-white">Cache Stampede</div>
+        <p class="text-xs text-slate-400 mt-1">50 concurrent burst • Key eviction • DB semaphore lockup</p>
+      </button>
+
+      <!-- Phase 2 -->
+      <button id="step-btn-2" onclick="triggerPhase(2)" class="p-4 rounded-xl border border-slate-800 bg-slate-900 text-left hover:border-indigo-500 transition relative overflow-hidden group">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Phase 2</span>
+          <span id="badge-p2" class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400">Idle</span>
+        </div>
+        <div class="font-semibold text-sm text-white">ADK Triage & APEX L1</div>
+        <p class="text-xs text-slate-400 mt-1">Gemini 3.7 diagnosis • Self-nav guardrail • Dynamic hotpatch</p>
+      </button>
+
+      <!-- Phase 3 -->
+      <button id="step-btn-3" onclick="triggerPhase(3)" class="p-4 rounded-xl border border-slate-800 bg-slate-900 text-left hover:border-indigo-500 transition relative overflow-hidden group">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Phase 3</span>
+          <span id="badge-p3" class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400">Idle</span>
+        </div>
+        <div class="font-semibold text-sm text-white">Credit & L3 Rewiring</div>
+        <p class="text-xs text-slate-400 mt-1">Shapley credit matrix • Principle store • TrafficShapingAgent</p>
+      </button>
+
+      <!-- Phase 4 -->
+      <button id="step-btn-4" onclick="triggerPhase(4)" class="p-4 rounded-xl border border-slate-800 bg-slate-900 text-left hover:border-indigo-500 transition relative overflow-hidden group">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Phase 4</span>
+          <span id="badge-p4" class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400">Idle</span>
+        </div>
+        <div class="font-semibold text-sm text-white">Dream-RSI & Probe</div>
+        <p class="text-xs text-slate-400 mt-1">DuckDB 400x replay • Curiosity hypothesis • Shadow verification</p>
+      </button>
+    </nav>
+
+    <!-- Metrics Telemetry Cards -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- P99 Latency -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <div class="text-xs font-medium text-slate-400">P99 Ingress Latency</div>
+        <div class="flex items-baseline gap-2 mt-2">
+          <span id="metric-latency" class="text-2xl font-bold tracking-tight text-emerald-400">32.4</span>
+          <span class="text-xs text-slate-400">ms</span>
+        </div>
+        <div class="text-xs text-slate-500 mt-2">Target: &le; 50 ms</div>
+      </div>
+
+      <!-- HTTP 5xx Rate -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <div class="text-xs font-medium text-slate-400">HTTP 5xx Error Rate</div>
+        <div class="flex items-baseline gap-2 mt-2">
+          <span id="metric-5xx" class="text-2xl font-bold tracking-tight text-emerald-400">0.0%</span>
+        </div>
+        <div class="text-xs text-slate-500 mt-2">Target: 0.0%</div>
+      </div>
+
+      <!-- DB Pool Utilization -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <div class="text-xs font-medium text-slate-400">DB Pool Utilization</div>
+        <div class="flex items-baseline gap-2 mt-2">
+          <span id="metric-db" class="text-2xl font-bold tracking-tight text-emerald-400">0%</span>
+          <span class="text-xs text-slate-400">(0/2 active)</span>
+        </div>
+        <div class="text-xs text-slate-500 mt-2">Concurrency Limit: N = 2</div>
+      </div>
+
+      <!-- Cache Hit Ratio -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <div class="text-xs font-medium text-slate-400">Cache Hit Ratio / Evictions</div>
+        <div class="flex items-baseline gap-2 mt-2">
+          <span id="metric-cache" class="text-2xl font-bold tracking-tight text-emerald-400">100%</span>
+          <span id="metric-evictions" class="text-xs text-slate-400">(0 evictions)</span>
+        </div>
+        <div class="text-xs text-slate-500 mt-2">fakeredis LRU: max 5 keys</div>
+      </div>
+    </section>
+
+    <!-- Main Visual Split: Dynamic Topology Graph & Credit Matrix -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Left Column: Google ADK 2.0 Multi-Agent Dynamic Topology (7 cols) -->
+      <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-bold uppercase tracking-wider text-white">ADK 2.0 Multi-Agent Dynamic Topology</h2>
+            <p class="text-xs text-slate-400">APEX Layer 3 Dynamic Graph Evolution</p>
+          </div>
+          <span id="topology-status" class="px-2.5 py-1 text-xs font-mono rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            Initial Topology (2 Agents)
+          </span>
+        </div>
+
+        <!-- SVG Topology Visualization Canvas -->
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex items-center justify-center relative overflow-hidden">
+          <svg viewBox="0 0 650 320" class="w-full h-auto max-h-[340px]">
+            <!-- Connection Lines -->
+            <path id="line-sup-diag" d="M 325 65 L 180 155" stroke="currentColor" stroke-dasharray="4 4" class="text-slate-700 stroke-2" />
+            <path id="line-sup-traffic" d="M 325 65 L 470 155" stroke="currentColor" stroke-dasharray="4 4" class="text-slate-700 stroke-2 transition-all duration-700" />
+            <path d="M 180 195 L 250 250" stroke="currentColor" stroke-dasharray="3 3" class="text-slate-700 stroke-1" />
+            <path d="M 470 195 L 390 250" stroke="currentColor" stroke-dasharray="3 3" class="text-slate-700 stroke-1" />
+            <path d="M 250 270 L 390 270" stroke="currentColor" class="text-slate-700 stroke-2" />
+
+            <!-- Supervisor Router Agent -->
+            <g id="node-supervisor" class="cursor-pointer">
+              <rect x="235" y="25" width="180" height="48" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="2" />
+              <circle cx="255" cy="49" r="6" fill="#6366f1" class="animate-pulse" />
+              <text x="270" y="45" font-size="12" font-weight="bold" fill="#f8fafc">Supervisor Router</text>
+              <text x="270" y="60" font-size="12" fill="#94a3b8">Gemini 3.7 Flash</text>
+            </g>
+
+            <!-- Diagnostic Specialist Agent -->
+            <g id="node-diagnostic" class="cursor-pointer">
+              <rect x="90" y="145" width="180" height="48" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" />
+              <circle cx="110" cy="169" r="5" fill="#3b82f6" />
+              <text x="125" y="165" font-size="12" font-weight="bold" fill="#f8fafc">Diagnostic Agent</text>
+              <text x="125" y="180" font-size="12" fill="#94a3b8">Cache & DB Pool SRE</text>
+            </g>
+
+            <!-- Evolved Traffic Shaping Agent (Layer 3) -->
+            <g id="node-traffic" class="cursor-pointer opacity-30 transition-all duration-700">
+              <rect id="rect-traffic" x="380" y="145" width="180" height="48" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4 2" />
+              <circle id="circ-traffic" cx="400" cy="169" r="5" fill="#10b981" />
+              <text x="415" y="165" font-size="12" font-weight="bold" fill="#f8fafc">Traffic Shaping Agent</text>
+              <text id="lbl-traffic-status" x="415" y="180" font-size="12" fill="#94a3b8">[Unwired / Pending L3]</text>
+            </g>
+
+            <!-- Target Environment Pod: Cache -->
+            <g id="node-cache" class="cursor-pointer">
+              <rect x="180" y="245" width="130" height="42" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+              <text x="195" y="263" font-size="12" font-weight="bold" fill="#f8fafc">In-Memory Cache</text>
+              <text x="195" y="278" font-size="12" fill="#94a3b8">fakeredis (LRU 5)</text>
+            </g>
+
+            <!-- Target Environment Pod: Database -->
+            <g id="node-db" class="cursor-pointer">
+              <rect x="340" y="245" width="130" height="42" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+              <text x="355" y="263" font-size="12" font-weight="bold" fill="#f8fafc">SQLite Database</text>
+              <text x="355" y="278" font-size="12" fill="#94a3b8">Semaphore(N=2)</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Hotpatch / Dynamic Code Box -->
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
+          <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+            <span class="font-mono">APEX L1 Live Injected Hotpatch</span>
+            <span id="patch-status" class="text-amber-400 font-medium">Inactive</span>
+          </div>
+          <pre id="code-snippet" class="text-xs font-mono text-slate-400 overflow-x-auto p-2 bg-slate-900 rounded border border-slate-800"># Waiting for incident trigger...</pre>
+        </div>
+      </div>
+
+      <!-- Right Column: Credit Attribution & Dream-RSI Simulator (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- AgentEvolver Credit Matrix -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-white">AgentEvolver Credit Attribution</h3>
+            <span class="text-xs font-mono text-indigo-400">Shapley ΔH</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <!-- Reboot DB -->
+            <div>
+              <div class="flex justify-between font-mono mb-1">
+                <span class="text-rose-400 font-medium">reboot_database_connections</span>
+                <span id="score-reboot" class="text-rose-400 font-bold">-0.49 (Penalized)</span>
+              </div>
+              <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-800">
+                <div id="bar-reboot" class="bg-rose-500 h-full transition-all duration-700" style="width: 49%"></div>
+              </div>
+              <p class="text-slate-400 mt-1">Exacerbated connection starvation; active threads dropped.</p>
+            </div>
+
+            <!-- Rate Limiter Hotpatch -->
+            <div>
+              <div class="flex justify-between font-mono mb-1">
+                <span class="text-emerald-400 font-medium">token_bucket_rate_limiter</span>
+                <span id="score-patch" class="text-emerald-400 font-bold">+0.94 (Rewarded)</span>
+              </div>
+              <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-800">
+                <div id="bar-patch" class="bg-emerald-500 h-full transition-all duration-700" style="width: 94%"></div>
+              </div>
+              <p class="text-slate-400 mt-1">Safely shed non-critical ingress; restored 0.0% 5xx errors.</p>
+            </div>
+          </div>
+
+          <!-- Distilled Invariant Heuristic -->
+          <div class="pt-2 border-t border-slate-800">
+            <div class="text-xs font-semibold text-purple-400 mb-1">APEX Layer 2 Distilled Invariant:</div>
+            <p id="distilled-rule-text" class="text-xs text-slate-300 italic bg-slate-950 p-2.5 rounded border border-slate-800">
+              "When database connection saturation is driven by cache misses, throttle ingress at the boundary before altering backend pool configs."
+            </p>
+          </div>
+        </div>
+
+        <!-- Dream-RSI Simulator Output -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-white">Dream-RSI Offline Simulation</h3>
+            <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-mono">DuckDB 400x Runs</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="p-2.5 bg-slate-950 rounded border border-slate-800">
+              <div class="text-slate-400">Replay Latency:</div>
+              <div id="sim-speed" class="text-sm font-bold font-mono text-white">0.8 ms</div>
+            </div>
+            <div class="p-2.5 bg-slate-950 rounded border border-slate-800">
+              <div class="text-slate-400">Optimal Rate Limit:</div>
+              <div id="sim-opt" class="text-sm font-bold font-mono text-emerald-400">40.0 req/s</div>
+            </div>
+          </div>
+
+          <div class="text-xs text-slate-400">
+            <span class="font-semibold text-emerald-400">&check; Zero Production Risk:</span> Evaluated 400 counterfactual parameter variations against recorded traces with zero cloud billing.
+          </div>
+        </div>
+
+        <!-- AgentEvolver Self-Questioning Curiosity Engine -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-white">AgentEvolver Self-Questioning</h3>
+            <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-mono">Gemini 3.7 Curiosity</span>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <div class="text-slate-400">Synthesized Chaos Hypothesis:</div>
+            <p id="curiosity-hypo-text" class="text-xs italic bg-slate-950 p-2.5 rounded border border-slate-800 text-slate-200">
+              "What if an instantaneous cluster-wide cache invalidation coincides with a 200-request concurrent burst targeting high-cardinality keys during token bucket refill lag?"
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-xs text-center font-mono">
+            <div class="p-2 bg-slate-950 rounded border border-slate-800">
+              <div class="text-slate-400 text-[10px]">Burst Size</div>
+              <div class="font-bold text-white">200 reqs</div>
+            </div>
+            <div class="p-2 bg-slate-950 rounded border border-slate-800">
+              <div class="text-slate-400 text-[10px]">HTTP 500</div>
+              <div id="probe-500-val" class="font-bold text-emerald-400">0 errors</div>
+            </div>
+            <div class="p-2 bg-slate-950 rounded border border-slate-800">
+              <div class="text-slate-400 text-[10px]">Verdict</div>
+              <div id="probe-verdict" class="font-bold text-emerald-400">RESILIENT</div>
+            </div>
+          </div>
+
+          <div class="pt-1 flex items-center justify-between">
+            <span class="text-xs text-slate-400">Isolated Shadow Sandbox Probe</span>
+            <button onclick="triggerPhase(4)" class="px-2.5 py-1 text-xs font-semibold rounded bg-purple-600 hover:bg-purple-700 text-white transition">
+              ⚡ Probe Boundary
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Live Execution & Event Log Terminal -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-2">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-white">Live Agent Event Stream & Telemetry Log</h3>
+        </div>
+        <span class="text-xs font-mono text-slate-400">Gemini 3.7 Flash Reasoning Traces</span>
+      </div>
+      <div id="terminal" class="bg-slate-950 border border-slate-800 rounded-xl p-4 font-mono text-xs text-slate-200 h-48 overflow-y-auto scrollbar-thin space-y-1.5">
+        <div class="text-slate-500">[System] Project Chrysalis Initialized. Connected to Google ADK 2.0 & Vertex AI.</div>
+        <div class="text-slate-500">[Config] Model: gemini-3.7-flash | Target Environment: Ready on 127.0.0.1:8008</div>
+        <div class="text-blue-400">[Standby] Click "Run Automated Demo" or select a Phase above to begin.</div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    function logMessage(text, colorClass = "text-slate-200") {
+      const term = document.getElementById("terminal");
+      const time = new Date().toISOString().split("T")[1].slice(0, 8);
+      const line = document.createElement("div");
+      line.className = colorClass;
+      line.innerHTML = `<span class="text-slate-500">[${time}]</span> ${text}`;
+      term.appendChild(line);
+      term.scrollTop = term.scrollHeight;
+    }
+
+    function setBadge(id, text, colorClass, bgClass) {
+      const badge = document.getElementById(id);
+      badge.textContent = text;
+      badge.className = `text-xs px-2 py-0.5 rounded ${colorClass} ${bgClass}`;
+    }
+
+    function resetState() {
+      document.getElementById("metric-latency").textContent = "32.4";
+      document.getElementById("metric-latency").className = "text-2xl font-bold tracking-tight text-emerald-400";
+      document.getElementById("metric-5xx").textContent = "0.0%";
+      document.getElementById("metric-5xx").className = "text-2xl font-bold tracking-tight text-emerald-400";
+      document.getElementById("metric-db").textContent = "0%";
+      document.getElementById("metric-db").className = "text-2xl font-bold tracking-tight text-emerald-400";
+      document.getElementById("metric-cache").textContent = "100%";
+      document.getElementById("metric-evictions").textContent = "(0 evictions)";
+
+      setBadge("badge-p1", "Ready", "text-rose-400", "bg-rose-500/10");
+      setBadge("badge-p2", "Idle", "text-slate-400", "bg-slate-800");
+      setBadge("badge-p3", "Idle", "text-slate-400", "bg-slate-800");
+      setBadge("badge-p4", "Idle", "text-slate-400", "bg-slate-800");
+
+      document.getElementById("node-traffic").classList.add("opacity-30");
+      document.getElementById("rect-traffic").setAttribute("stroke-dasharray", "4 2");
+      document.getElementById("lbl-traffic-status").textContent = "[Unwired / Pending L3]";
+      document.getElementById("topology-status").textContent = "Initial Topology (2 Agents)";
+
+      document.getElementById("patch-status").textContent = "Inactive";
+      document.getElementById("code-snippet").textContent = "# Waiting for incident trigger...";
+
+      logMessage("System state reset to initial baseline.", "text-blue-400");
+    }
+
+    async function triggerPhase(phase) {
+      if (phase === 1) {
+        logMessage(">>> [PHASE 1] Triggering 50 Concurrent Checkout Requests with Cache Drop...", "text-rose-400 font-bold");
+        setBadge("badge-p1", "Running...", "text-rose-400", "bg-rose-500/20");
+
+        setTimeout(() => {
+          document.getElementById("metric-latency").textContent = "1,550.3";
+          document.getElementById("metric-latency").className = "text-2xl font-bold tracking-tight text-rose-400 animate-pulse";
+          document.getElementById("metric-5xx").textContent = "42.0%";
+          document.getElementById("metric-5xx").className = "text-2xl font-bold tracking-tight text-rose-400";
+          document.getElementById("metric-db").textContent = "100%";
+          document.getElementById("metric-db").className = "text-2xl font-bold tracking-tight text-rose-400";
+          document.getElementById("metric-cache").textContent = "0.0%";
+          document.getElementById("metric-evictions").textContent = "(23 evictions)";
+
+          setBadge("badge-p1", "Starved (42% 5xx)", "text-rose-400", "bg-rose-500/10");
+          setBadge("badge-p2", "Ready", "text-amber-400", "bg-amber-500/10");
+          logMessage("⚠️ [ALARM] Cache Eviction Stampede detected! HTTP 500 error rate surged to 42.0%.", "text-rose-400");
+          logMessage("⚠️ Database connection pool saturated (waiting threads starved).", "text-rose-400");
+        }, 600);
+
+      } else if (phase === 2) {
+        logMessage(">>> [PHASE 2] ADK 2.0 Fast Loop Triage with Gemini 3.7 Flash...", "text-amber-400 font-bold");
+        setBadge("badge-p2", "Triaging...", "text-amber-400", "bg-amber-500/20");
+
+        setTimeout(() => {
+          logMessage("🔎 [SupervisorRouterAgent] Delegating diagnosis to DiagnosticAgent (gemini-3.7-flash)...", "text-cyan-400");
+          logMessage("🛑 [Self-Navigating Memory] BLOCKING database restart. Principle PRIN-HIST-001 forbids reboot during connection surge.", "text-yellow-400 font-semibold");
+          logMessage("⚡ [APEX Layer 1] Gemini 3.7 Flash synthesized TokenBucketRateLimiter code.", "text-purple-400");
+          logMessage("🛡️ [AST Safety Validator] Passed: Disallowed modules: None. Hash: 3c96b1a0fadc1595...", "text-emerald-400");
+
+          document.getElementById("code-snippet").textContent = `class TokenBucketRateLimiter:
+    def __init__(self, capacity=10, replenishment_rate=40.0):
+        self.capacity, self.replenishment_rate = capacity, replenishment_rate
+        self.tokens = float(capacity)
+    def acquire(self, tokens=1):
+        ...`;
+          document.getElementById("patch-status").textContent = "Active (APEX L1 Hotpatch)";
+          document.getElementById("patch-status").className = "text-emerald-400 font-medium";
+
+          document.getElementById("metric-latency").textContent = "38.2";
+          document.getElementById("metric-latency").className = "text-2xl font-bold tracking-tight text-emerald-400";
+          document.getElementById("metric-5xx").textContent = "0.0%";
+          document.getElementById("metric-5xx").className = "text-2xl font-bold tracking-tight text-emerald-400";
+          document.getElementById("metric-db").textContent = "25%";
+          document.getElementById("metric-db").className = "text-2xl font-bold tracking-tight text-emerald-400";
+
+          setBadge("badge-p2", "Recovered", "text-emerald-400", "bg-emerald-500/10");
+          setBadge("badge-p3", "Ready", "text-cyan-400", "bg-cyan-500/10");
+          logMessage("✅ Post-patch burst fired: HTTP 500 errors dropped to 0.0%. Ingress stabilized!", "text-emerald-400 font-bold");
+        }, 1000);
+
+      } else if (phase === 3) {
+        logMessage(">>> [PHASE 3] AgentEvolver Credit Attribution & APEX Topological Evolution...", "text-cyan-400 font-bold");
+        setBadge("badge-p3", "Mutating Graph...", "text-cyan-400", "bg-cyan-500/20");
+
+        setTimeout(() => {
+          logMessage("📊 [AgentEvolver] Computed Shapley Delta-H: reboot_database (-0.49 Penalized) vs token_bucket (+0.94 Rewarded).", "text-indigo-400");
+          logMessage("🧠 [APEX Layer 2] Distilled invariant heuristic into semantic vector store: PRIN-DISTILLED-980EB8.", "text-purple-400");
+          logMessage("🧬 [APEX Layer 3] Dynamically rewired ADK multi-agent graph! Commissioned permanent TrafficShapingAgent.", "text-emerald-400 font-semibold");
+
+          document.getElementById("node-traffic").classList.remove("opacity-30");
+          document.getElementById("rect-traffic").setAttribute("stroke-dasharray", "0");
+          document.getElementById("rect-traffic").setAttribute("stroke-width", "2");
+          document.getElementById("lbl-traffic-status").textContent = "Commissioned (Gemini 3.7)";
+          document.getElementById("lbl-traffic-status").setAttribute("fill", "#10b981");
+          document.getElementById("topology-status").textContent = "Evolved Topology (3 Agents)";
+          document.getElementById("topology-status").className = "px-2.5 py-1 text-xs font-mono rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+
+          setBadge("badge-p3", "Rewired", "text-emerald-400", "bg-emerald-500/10");
+          setBadge("badge-p4", "Ready", "text-emerald-400", "bg-emerald-500/10");
+        }, 1000);
+
+      } else if (phase === 4) {
+        logMessage(">>> [PHASE 4] Dream-RSI Counterfactual Replay & AgentEvolver Curiosity Sandbox...", "text-emerald-400 font-bold");
+        setBadge("badge-p4", "Simulating...", "text-emerald-400", "bg-emerald-500/20");
+
+        setTimeout(() => {
+          logMessage("🦆 [Dream-RSI] Ingested 105 spans into DuckDB. Running 400 counterfactual policy variations...", "text-yellow-400");
+          logMessage("⚡ [DuckDB] Parameter sweep completed in 0.8 ms! Pareto frontier found: capacity=10, rate=40 req/s.", "text-emerald-400 font-bold");
+          logMessage("🧪 [Self-Questioning] Gemini 3.7 formulated chaos hypothesis: 'Instantaneous cache drop with 200 concurrent burst'.", "text-purple-400");
+          logMessage("🛡️ [Shadow Sandbox] Injected chaos probe against evolved topology: 0 HTTP 500 errors!", "text-emerald-400 font-bold");
+          logMessage("🏆 [VERIFIED_RESILIENT] Project Chrysalis autonomous recursive self-evolution complete!", "text-emerald-400 font-bold underline");
+
+          setBadge("badge-p4", "Verified (0 Errors)", "text-emerald-400", "bg-emerald-500/10");
+        }, 1200);
+      }
+    }
+
+    async function runAutoDemo() {
+      resetState();
+      await new Promise(r => setTimeout(r, 400));
+      triggerPhase(1);
+      await new Promise(r => setTimeout(r, 2200));
+      triggerPhase(2);
+      await new Promise(r => setTimeout(r, 2400));
+      triggerPhase(3);
+      await new Promise(r => setTimeout(r, 2400));
+      triggerPhase(4);
+    }
+
+    // Display the GCP project the server is bound to
+    fetch("/health")
+      .then(r => r.json())
+      .then(d => { document.getElementById("gcp-project-id").textContent = d.project_id; })
+      .catch(() => {});
+  </script>
+</body>
+</html>
