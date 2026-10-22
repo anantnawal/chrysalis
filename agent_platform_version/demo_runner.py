@@ -50,7 +50,8 @@ class Style:
 def print_banner():
     banner = f"""
 {Style.CYAN}{Style.BOLD}========================================================================================
-   PROJECT CHRYSALIS: AUTONOMOUS RESILIENCY ENGINE (GOOGLE CLOUD AGENT PLATFORM)
+   PROJECT CHRYSALIS (GOOGLE CLOUD AGENT PLATFORM EDITION)
+   Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform
    Framework: Google ADK 2.0 | Model: Gemini 3.7 Flash | GCP: {PROJECT_ID}
    Governance: Vertex AI Model Armor | Cloud KMS | OPA Policy Controller | HITL Dual-Custody
 ========================================================================================{Style.RESET}"""

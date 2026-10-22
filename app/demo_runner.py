@@ -69,7 +69,8 @@ def print_banner():
     )
     banner = f"""
 {Style.CYAN}{Style.BOLD}========================================================================================
-   PROJECT CHRYSALIS: SELF-EVOLVING AUTONOMOUS RESILIENCY & FINOPS ENGINE
+   PROJECT CHRYSALIS
+   Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform
    Google ADK 2.0 Multi-Agent Framework + Gemini on Vertex AI ({PROJECT_ID})
 ========================================================================================{Style.RESET}{offline_note}
 """

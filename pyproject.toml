@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "project-chrysalis"
 version = "2.0.0"
-description = "Self-Evolving Autonomous Resiliency & FinOps Engine built with Google ADK 2.0 and Gemini"
+description = "Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform, built with Google ADK 2.0 and Gemini"
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.10"

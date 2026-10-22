@@ -1,7 +1,7 @@
 > [!NOTE]
 > This is the original technical design specification for Project Chrysalis. For how to install, run and reset the current implementation, see the [repository README](../README.md) and the [Agent Platform edition README](../agent_platform_version/README.md).
 
-# Project Chrysalis: Self-Evolving Autonomous Resiliency & FinOps Engine
+# Project Chrysalis: Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform
 
 ## Technical Architecture & Implementation Specification for Google ADK 2.0 with Gemini 3.7 Flash
 

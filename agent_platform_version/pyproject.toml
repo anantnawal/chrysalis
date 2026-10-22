@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "chrysalis-agent-platform"
 version = "0.2.0"
-description = "Project Chrysalis: Autonomous Resiliency & FinOps Engine on Google Cloud Agent Platform"
+description = "Project Chrysalis: Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform"
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.10"
