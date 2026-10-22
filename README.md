@@ -1,4 +1,4 @@
-# Self-Evolving AI: Autonomous Resiliency & FinOps Engine (Project Chrysalis)
+# Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform (Project Chrysalis)
 
 [![Google Cloud](https://img.shields.io/badge/Platform-Google%20Cloud-4285F4)](https://cloud.google.com/)
 [![Google ADK 2.0](https://img.shields.io/badge/Framework-Google%20ADK%202.0-4285F4)](https://pypi.org/project/google-adk/)
