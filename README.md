@@ -12,7 +12,7 @@
 > - **Architecture Specification:** [docs/architecture_specification.md](docs/architecture_specification.md)  
 > - **Google Cloud Agent Platform Edition (Recommended):** [`agent_platform_version/`](agent_platform_version/README.md) — Gemini-synthesized hotpatches behind sandbox gates, Cloud KMS code signing + Binary Authorization, Policy-as-Code controller, a Tier-2 dual-custody Human-in-the-Loop (HITL) approval modal, and BigQuery Dream-RSI counterfactual sweeps.
 
-![Self-Evolving AI Architecture on Google Cloud & Gemini Agent Platform](docs/self_evolving_ai_architecture.jpeg)
+![Self-Evolving AI Architecture on Google Cloud & Gemini Platform](docs/self_evolving_ai_architecture.jpeg)
 
 This repository resolves the fundamental SRE trilemma (**Exploration Risk**, **Brittle Generalization**, and **Coarse Credit Assignment**) by unifying three recursive self-improvement paradigms into an extensible multi-agent framework built with **Google Agent Development Kit (ADK) 2.0** (`google-adk`) and powered by **Gemini 4.0 Argon on Vertex AI**.
 
