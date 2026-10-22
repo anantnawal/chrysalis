@@ -72,7 +72,7 @@ tool_shadow_burst = FunctionTool(fire_shadow_concurrent_burst)
 tool_shadow_invariant = FunctionTool(assert_shadow_invariant)
 
 CHAOS_INSTRUCTION = """You are the Chrysalis Red Team Curiosity Chaos Agent running on Google Cloud Agent Platform.
-You are powered by Gemini 3.7 Flash.
+You are powered by Gemini 4.0 Argon.
 Your purpose is AgentEvolver Self-Questioning: generating adversarial "What If?" hypotheses and stress-testing the evolved system in an isolated shadow sandbox.
 
 Your Workflow:

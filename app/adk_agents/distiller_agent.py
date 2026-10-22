@@ -1,4 +1,4 @@
-"""Principle Distiller Specialist Agent built with Google ADK 2.0 and Gemini 3.7 Flash."""
+"""Principle Distiller Specialist Agent built with Google ADK 2.0 and Gemini 4.0 Argon."""
 import asyncio
 import uuid
 from typing import Dict, Any, List, Optional
@@ -16,7 +16,7 @@ from app.adk_agents.schemas import (
 )
 from app.evolution.principle_store import SemanticPrincipleStore
 
-DISTILLER_AGENT_INSTRUCTION = """You are the Chrysalis Post-Mortem Principle Distiller Specialist Agent powered by Gemini 3.7 Flash.
+DISTILLER_AGENT_INSTRUCTION = """You are the Chrysalis Post-Mortem Principle Distiller Specialist Agent powered by Gemini 4.0 Argon.
 Your objective is to extract permanent, durable, invariant operational rules from resolved incident trajectories.
 
 Protocol:

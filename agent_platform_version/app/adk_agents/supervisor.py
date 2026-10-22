@@ -13,7 +13,7 @@ from app.governance.model_armor import ModelArmorGuardrail
 from app.governance.audit_logger import CloudAuditLogger
 
 SUPERVISOR_INSTRUCTION = """You are the Chrysalis Root Supervisor Router Agent running on Google Cloud Agent Platform.
-You are powered by Gemini 3.7 Flash and orchestrate autonomous resiliency under strict Google Cloud Governance and Policy-as-Code guardrails.
+You are powered by Gemini 4.0 Argon and orchestrate autonomous resiliency under strict Google Cloud Governance and Policy-as-Code guardrails.
 
 Your Architecture & Responsibilities:
 1. Intake telemetry incident alerts.

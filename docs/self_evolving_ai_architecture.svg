@@ -144,7 +144,7 @@
   <!-- ======================================================================= -->
   <rect x="366" y="102" width="548" height="365" rx="12" fill="#f8faff" stroke="#8ab4f8" stroke-width="1.5" stroke-dasharray="6,4"/>
   <rect x="366" y="102" width="548" height="38" rx="12" fill="#e8f0fe"/>
-  <text x="384" y="126" font-size="12" font-weight="700" fill="#174ea6" letter-spacing="0.3">ZONE 2: GOOGLE CLOUD AGENT PLATFORM (ADK 2.0 &amp; GEMINI 3.7 FLASH)</text>
+  <text x="384" y="126" font-size="12" font-weight="700" fill="#174ea6" letter-spacing="0.3">ZONE 2: GOOGLE CLOUD AGENT PLATFORM (ADK 2.0 &amp; GEMINI 4.0 ARGON)</text>
 
   <!-- Root Node: SupervisorRouterAgent -->
   <g>
@@ -152,7 +152,7 @@
     <rect x="460" y="156" width="360" height="92" rx="10" fill="#ffffff" stroke="#1a73e8" stroke-width="2"/>
     <rect x="474" y="166" width="144" height="19" rx="4" fill="#1a73e8"/>
     <text x="546" y="179" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">ROOT ADK COORDINATOR</text>
-    <text x="628" y="179" font-size="11" font-weight="700" fill="#1a73e8" font-family="Menlo, Monaco, Consolas, monospace">gemini-3.7-flash</text>
+    <text x="628" y="179" font-size="11" font-weight="700" fill="#1a73e8" font-family="Menlo, Monaco, Consolas, monospace">gemini-4-argon</text>
     <text x="474" y="203" font-size="14.5" font-weight="700" fill="#0f172a" font-family="Menlo, Monaco, Consolas, monospace">SupervisorRouterAgent</text>
     <text x="474" y="222" font-size="11" fill="#334155">• Ingests sanitized alerts &amp; synthesizes L1 hotpatches</text>
     <text x="474" y="239" font-size="11" fill="#334155">• Dynamically routes across sub_agents DAG in RAM</text>

@@ -58,7 +58,7 @@ def test_dynamic_tool_registration():
     """Verify dynamic compilation, ADK FunctionTool wrapping, and live agent attachment."""
     agent = LlmAgent(
         name="test_supervisor",
-        model="gemini-2.5-flash",
+        model="gemini-4-argon",
         instruction="Supervisor test",
         tools=[],
     )

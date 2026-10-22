@@ -3,7 +3,7 @@
 
 # Project Chrysalis: Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform
 
-## Technical Architecture & Implementation Specification for Google ADK 2.0 with Gemini 3.7 Flash
+## Technical Architecture & Implementation Specification for Google ADK 2.0 with Gemini 4.0 Argon
 
 ## 1\. Executive Summary & Problem Formulation
 
@@ -15,7 +15,7 @@ Autonomous Site Reliability Engineering (SRE) agents operating in production env
 
 3. **Coarse Credit Assignment:** In multi-step diagnostic chains, agents cannot determine which specific sub-action resolved an incident versus which action exacerbated latency or costs.
 
-**Project Chrysalis** resolves this trilemma by unifying three cutting-edge paradigms in recursive self-improvement and agent evolution into an extensible framework based on the **Google Agent Development Kit (ADK) 2.0** (`google-adk`) and powered end-to-end by **Gemini 3.7 Flash**:
+**Project Chrysalis** resolves this trilemma by unifying three cutting-edge paradigms in recursive self-improvement and agent evolution into an extensible framework based on the **Google Agent Development Kit (ADK) 2.0** (`google-adk`) and powered end-to-end by **Gemini 4.0 Argon**:
 
 * **Dream-RSI (arXiv:2609.14858):** Offline policy optimization that transforms incident execution trajectory trees into an empirical replay simulator ("dreaming"). This enables thousands of counterfactual policy variations to be evaluated offline with zero production risk and zero runtime compute expense.
 
@@ -35,7 +35,7 @@ Autonomous Site Reliability Engineering (SRE) agents operating in production env
 
   * *Self-Attributing:* Fine-grained token- and step-level credit assignment calculated over distributed telemetry deltas.
 
-* **Unified Model Foundation (Gemini 3.7 Flash):** Every agentic role—including the supervisor orchestrator, diagnostic analyzer, AST tool code generator, principle distiller, and curiosity prober—is standardized on **Gemini 3.7 Flash**, utilizing its hybrid reasoning capabilities to conduct fast tactical triage and deep analytical synthesis across both the fast and offline evolutionary loops.
+* **Unified Model Foundation (Gemini 4.0 Argon):** Every agentic role—including the supervisor orchestrator, diagnostic analyzer, AST tool code generator, principle distiller, and curiosity prober—is standardized on **Gemini 4.0 Argon**, utilizing its hybrid reasoning capabilities to conduct fast tactical triage and deep analytical synthesis across both the fast and offline evolutionary loops.
 
 The architecture is dual-target: it can deploy to **Google Cloud / Gemini Enterprise Agent Platform** (using Cloud Run, Vertex AI Reasoning Engine, BigQuery, and Memorystore) or run entirely in an **ultra-compact, single-process, zero-cloud in-memory mode** (using FastAPI, `fakeredis`, SQLite connection semaphores, DuckDB, and in-memory vector stores).
 
@@ -44,7 +44,7 @@ The architecture is dual-target: it can deploy to **Google Cloud / Gemini Enterp
 ```
 +----------------------------------------------------------------------------------------------------+
 |                                    PROJECT CHRYSALIS ARCHITECTURE                                    |
-|                       (Google ADK 2.0 Multi-Agent Framework + Gemini 3.7 Flash)                     |
+|                       (Google ADK 2.0 Multi-Agent Framework + Gemini 4.0 Argon)                     |
 +----------------------------------------------------------------------------------------------------+
                                                   |
          +----------------------------------------+----------------------------------------+
@@ -93,19 +93,19 @@ The architecture is dual-target: it can deploy to **Google Cloud / Gemini Enterp
 
 ### 3.3 The Autonomous Resolution & Evolution Lifecycle
 
-* **Active Triage (Fast Loop):** The ADK 2.0 Supervisor (Gemini 3.7 Flash) invokes *Self-Navigating* memory, which issues an immediate warning: *"Under connection storm, restarting the database causes total system failure."* The agent aborts database restarts and triggers an **APEX Layer 1 Harness Patch**, prompting Gemini 3.7 Flash to dynamically synthesize an in-memory token-bucket rate limiter that throttles non-critical ingress and relieves thread starvation.
+* **Active Triage (Fast Loop):** The ADK 2.0 Supervisor (Gemini 4.0 Argon) invokes *Self-Navigating* memory, which issues an immediate warning: *"Under connection storm, restarting the database causes total system failure."* The agent aborts database restarts and triggers an **APEX Layer 1 Harness Patch**, prompting Gemini 4.0 Argon to dynamically synthesize an in-memory token-bucket rate limiter that throttles non-critical ingress and relieves thread starvation.
 
 * **Credit Attribution (Offline Loop):** The *Self-Attributing* engine analyzes the OpenTelemetry execution trace, assigning $-0.85$ credit to database pool adjustments and $+0.92$ credit to ingress rate limiting.
 
-* **Principle Distillation & Graph Rewiring:** **APEX Layer 2** distills the invariant heuristic using Gemini 3.7 Flash: *"When database saturation is driven by cache misses, throttle ingress at the boundary before altering backend pool configs."* **APEX Layer 3** alters the root agent's routing topology, instantiating a dedicated **Traffic Shaping Agent** backed by Gemini 3.7 Flash.
+* **Principle Distillation & Graph Rewiring:** **APEX Layer 2** distills the invariant heuristic using Gemini 4.0 Argon: *"When database saturation is driven by cache misses, throttle ingress at the boundary before altering backend pool configs."* **APEX Layer 3** alters the root agent's routing topology, instantiating a dedicated **Traffic Shaping Agent** backed by Gemini 4.0 Argon.
 
 * **Counterfactual Simulation (Dream-RSI):** The agent replays the incident logs against DuckDB offline, simulating throughput across token replenishment rates ($r \in [10, 200]\text{ req/s}$) to calculate the exact mathematical Pareto frontier.
 
-* **Curiosity Probing (AgentEvolver Self-Questioning):** In a background sandbox, Gemini 3.7 Flash formulates and injects synthetic cache drops under simulated load, verifying that the newly wired multi-agent topology prevents connection pool starvation automatically.
+* **Curiosity Probing (AgentEvolver Self-Questioning):** In a background sandbox, Gemini 4.0 Argon formulates and injects synthetic cache drops under simulated load, verifying that the newly wired multi-agent topology prevents connection pool starvation automatically.
 
 ## 4\. Google ADK 2.0 System Architecture
 
-The system is architected as an ADK 2.0 multi-agent workflow, coordinating specialized declarative `Agent` units, deterministic controllers, dynamic tools, and shared contextual memory. All LLM-driven components leverage **Gemini 3.7 Flash**.
+The system is architected as an ADK 2.0 multi-agent workflow, coordinating specialized declarative `Agent` units, deterministic controllers, dynamic tools, and shared contextual memory. All LLM-driven components leverage **Gemini 4.0 Argon**.
 
 ```
                                 +-------------------------------------------+
@@ -123,14 +123,14 @@ The system is architected as an ADK 2.0 multi-agent workflow, coordinating speci
 |   |                                                                                                 |   |
 |   |                  +----------------------------------------------+                               |   |
 |   |                  |          Supervisor Router Agent             |                               |   |
-|   |                  |          (ADK 2.0 LlmAgent: Gemini 3.7 Flash)|                               |   |
+|   |                  |          (ADK 2.0 LlmAgent: Gemini 4.0 Argon)|                               |   |
 |   |                  +----------------------------------------------+                               |   |
 |   |                    /                    |                     \                                 |   |
 |   |         +---------+                     |                      +----------+                     |   |
 |   |         v                               v                                 v                     |   |
 |   |  +--------------------+        +--------------------+           +--------------------+          |   |
-|   |  | Diagnostic SRE     |        | Remediation Agent  |           | Traffic Shaping    |          |   |
-|   |  | Agent (Gemini 3.7) |        | (FinOps / Scaling) |           | Agent (Evolved L3) |          |   |
+|   |  | Diagnostic Agent   |        | Remediation Agent  |           | Traffic Shaping    |          |   |
+|   |  | (Gemini 4.0 Argon) |        | (FinOps / Scaling) |           | Agent (Evolved L3) |          |   |
 |   |  +--------------------+        +--------------------+           +--------------------+          |   |
 |   |            \                             /                                |                     |   |
 |   |             +---------------------------+---------------------------------+                     |   |
@@ -155,7 +155,7 @@ The system is architected as an ADK 2.0 multi-agent workflow, coordinating speci
 |                 v                                v                                 v                    |
 |   +---------------------------+    +----------------------------+    +------------------------------+   |
 |   |  Self-Attributing Matrix  | -> |  APEX Layer 2 Distillation | -> |  Automated Graph Mutator     |   |
-|   |  (Fine-Grained Credit)    |    |  (Gemini 3.7 Flash Vector) |    |  (Topology Re-wiring)        |   |
+|   |  (Fine-Grained Credit)    |    |  (Gemini 4.0 Argon Vector) |    |  (Topology Re-wiring)        |   |
 |   +---------------------------+    +----------------------------+    +------------------------------+   |
 +---------------------------------------------------------------------------------------------------------+
 
@@ -236,7 +236,7 @@ class TrajectoryTree(BaseModel):
 
 ```
 class DynamicToolDefinition(BaseModel):
-    """APEX Layer 1 Tool Patch synthesized by Gemini 3.7 Flash."""
+    """APEX Layer 1 Tool Patch synthesized by Gemini 4.0 Argon."""
     tool_name: str
     description: str
     python_code: str
@@ -245,7 +245,7 @@ class DynamicToolDefinition(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class OperationalPrinciple(BaseModel):
-    """APEX Layer 2 Distilled Invariant extracted by Gemini 3.7 Flash."""
+    """APEX Layer 2 Distilled Invariant extracted by Gemini 4.0 Argon."""
     principle_id: str
     trigger_pattern: str
     contraindicated_actions: List[str]
@@ -350,17 +350,17 @@ Because all request timestamps and cache miss flags are recorded in local DuckDB
 
 * **Telemetry Collector:** An in-process OpenTelemetry tracer that records execution traces into local memory buffers.
 
-### 7.2 ADK 2.0 Multi-Agent Fast Loop (Gemini 3.7 Flash)
+### 7.2 ADK 2.0 Multi-Agent Fast Loop (Gemini 4.0 Argon)
 
 * **Supervisor Router Agent (`LlmAgent`):**
 
-  * Model: `gemini-3.7-flash` (leveraging native dynamic reasoning to orchestrate sub-agents, validate guardrails, and arbitrate mitigation options).
+  * Model: `gemini-4-argon` (leveraging native dynamic reasoning to orchestrate sub-agents, validate guardrails, and arbitrate mitigation options).
 
   * Instructions: Ingests telemetry alerts; delegates diagnostic queries to `DiagnosticAgent`; evaluates recommendations; verifies guardrails; triggers dynamic tool execution.
 
 * **Diagnostic SRE Agent (`Agent`):**
 
-  * Model: `gemini-3.7-flash`.
+  * Model: `gemini-4-argon`.
 
   * Tools: `query_cache_stats`, `inspect_db_connections`, `retrieve_historical_principles`.
 
@@ -370,20 +370,20 @@ Because all request timestamps and cache miss flags are recorded in local DuckDB
 
   * Uses in-memory vector embeddings generated via `text-embedding-004` (or cosine similarity over local JSON/ChromaDB) to retrieve prior incident lessons before recommending dangerous actions.
 
-### 7.3 APEX Tri-Level Evolutionary Engine (Gemini 3.7 Flash Powered)
+### 7.3 APEX Tri-Level Evolutionary Engine (Gemini 4.0 Argon Powered)
 
 * **Layer 1 (Harness Patching):**
 
-  * When no built-in tool solves the incident, Gemini 3.7 Flash generates Python source code for an in-memory `TokenBucketRateLimiter`.
+  * When no built-in tool solves the incident, Gemini 4.0 Argon generates Python source code for an in-memory `TokenBucketRateLimiter`.
 
   * The code is validated against an AST safety parser (disallowing `os`, `sys`, `subprocess`) and dynamically registered as an active ADK `FunctionTool` via `agent.add_tool()`.
 
 * **Layer 2 (Principle Distillation):**
 
-  * Upon incident resolution, Gemini 3.7 Flash analyzes the full execution trajectory, extracts generalized invariants, and writes structured rules to the semantic principle store.  
+  * Upon incident resolution, Gemini 4.0 Argon analyzes the full execution trajectory, extracts generalized invariants, and writes structured rules to the semantic principle store.  
 * **Layer 3 (Topology Re-Wiring):**
 
-  * Dynamically reconfigures the ADK multi-agent structure. It instantiates a permanent `TrafficShapingAgent` (backed by Gemini 3.7 Flash), adds it as a sub-agent to the Supervisor, and updates routing instructions.
+  * Dynamically reconfigures the ADK multi-agent structure. It instantiates a permanent `TrafficShapingAgent` (backed by Gemini 4.0 Argon), adds it as a sub-agent to the Supervisor, and updates routing instructions.
 
 ### 7.4 Dream-RSI: DuckDB Replay Simulator
 
@@ -393,7 +393,7 @@ Because all request timestamps and cache miss flags are recorded in local DuckDB
 
 ### 7.5 AgentEvolver: Curiosity & Shadow Sandbox
 
-* **Self-Questioning Engine:** Gemini 3.7 Flash generates synthetic "What If?" hypotheses (e.g., *"What if the flash sale duration doubles while cache memory is halved?"*).
+* **Self-Questioning Engine:** Gemini 4.0 Argon generates synthetic "What If?" hypotheses (e.g., *"What if the flash sale duration doubles while cache memory is halved?"*).
 
 * **Fault Injection:** Triggers synthetic cache drops and concurrent request bursts against the shadow test environment to verify that the newly wired `TrafficShapingAgent` automatically maintains system availability.
 
@@ -402,7 +402,7 @@ Because all request timestamps and cache miss flags are recorded in local DuckDB
 | Architectural Role | Compact In-Memory Demo (Single Process) | Enterprise Production Stack (Google Cloud) |
 | :---- | :---- | :---- |
 | **Agent Orchestration** | `google-adk` local Python runtime | Vertex AI Reasoning Engine \+ Cloud Run |
-| **Primary LLM Model** | Gemini 3.7 Flash API (`gemini-3.7-flash`) | Gemini 3.7 Flash on Vertex AI & Gemini Enterprise |
+| **Primary LLM Model** | Gemini 4.0 Argon API (`gemini-4-argon`) | Gemini 4.0 Argon on Vertex AI & Gemini Enterprise |
 | **Cache Store** | `fakeredis` with LRU eviction policy | Cloud Memorystore for Redis |
 | **Relational DB** | SQLite `:memory:` with `threading.Semaphore(2)` | Cloud SQL (PostgreSQL) with limited pool |
 | **Trajectory Store** | In-Memory `DuckDB` table | Google BigQuery Partitioned Tables |
@@ -422,27 +422,27 @@ project_chrysalis/
 ├── pyproject.toml                      # Dependencies (google-adk, google-genai, fastapi, fakeredis, duckdb, etc.)
 ├── app/
 │   ├── __init__.py
-│   ├── config.py                       # Global settings (specifying gemini-3.7-flash model ID)
+│   ├── config.py                       # Global settings (specifying gemini-4-argon model ID)
 │   ├── target_env/                     # The simulated target infrastructure
 │   │   ├── __init__.py
 │   │   ├── server.py                   # FastAPI app with /checkout and /metrics
 │   │   ├── cache_service.py            # fakeredis wrapper with memory caps
 │   │   ├── db_service.py               # SQLite connection pool with semaphore locks
 │   │   └── telemetry.py                # In-memory metrics buffer and span collector
-│   ├── adk_agents/                     # Google ADK 2.0 multi-agent implementation (Gemini 3.7 Flash)
+│   ├── adk_agents/                     # Google ADK 2.0 multi-agent implementation (Gemini 4.0 Argon)
 │   │   ├── __init__.py
 │   │   ├── schemas.py                  # Pydantic models for metrics, traces, and principles
-│   │   ├── supervisor.py               # Root Supervisor Router Agent (gemini-3.7-flash)
-│   │   ├── diagnostic_agent.py         # SRE Diagnostic specialist (gemini-3.7-flash)
+│   │   ├── supervisor.py               # Root Supervisor Router Agent (gemini-4-argon)
+│   │   ├── diagnostic_agent.py         # SRE Diagnostic specialist (gemini-4-argon)
 │   │   ├── tools_library.py            # Standard read-only diagnostic tools
 │   │   └── dynamic_registry.py         # APEX Layer 1 Dynamic Tool Loader
 │   ├── evolution/                      # The offline learning engines
 │   │   ├── __init__.py
 │   │   ├── credit_attribution.py       # AgentEvolver Self-Attributing math engine
-│   │   ├── principle_store.py          # APEX Layer 2 vector memory & distillation (gemini-3.7-flash)
+│   │   ├── principle_store.py          # APEX Layer 2 vector memory & distillation (gemini-4-argon)
 │   │   ├── topology_mutator.py         # APEX Layer 3 graph re-wiring logic
 │   │   ├── dream_rsi_replay.py         # Dream-RSI DuckDB counterfactual replay engine
-│   │   └── self_questioner.py          # AgentEvolver shadow sandbox & chaos injector (gemini-3.7-flash)
+│   │   └── self_questioner.py          # AgentEvolver shadow sandbox & chaos injector (gemini-4-argon)
 │   └── demo_runner.py                  # End-to-end 5-minute automated demonstration script
 └── tests/
     ├── test_stampede_simulation.py     # Verifies cache stampede reproduction
@@ -467,23 +467,23 @@ project_chrysalis/
 
    * `GET /metrics`: Returns `SystemMetrics` (active connections, waiting threads, P99 latency, 5xx rate).
 
-### Step 2: ADK 2.0 Multi-Agent Setup (Gemini 3.7 Flash)
+### Step 2: ADK 2.0 Multi-Agent Setup (Gemini 4.0 Argon)
 
 1. Implement `app/adk_agents/tools_library.py`: Provide `FunctionTool` wrappers for `read_metrics`, `check_cache_status`, and `inspect_db_pool`.
 
-2. Implement `app/adk_agents/supervisor.py`: Construct the root agent using `from google.adk import Agent` configured with `model="gemini-3.7-flash"`. Define explicit routing instructions to delegate diagnostics to the `DiagnosticAgent`.
+2. Implement `app/adk_agents/supervisor.py`: Construct the root agent using `from google.adk import Agent` configured with `model="gemini-4-argon"`. Define explicit routing instructions to delegate diagnostics to the `DiagnosticAgent`.
 
-3. Implement `app/adk_agents/diagnostic_agent.py`: Construct the SRE diagnostic agent with `model="gemini-3.7-flash"` and bind the diagnostic tools.
+3. Implement `app/adk_agents/diagnostic_agent.py`: Construct the SRE diagnostic agent with `model="gemini-4-argon"` and bind the diagnostic tools.
 
 4. Implement `app/adk_agents/dynamic_registry.py`: Provide `register_dynamic_tool(agent, code_string)` which parses generated Python code, validates safety, wraps it in an ADK `FunctionTool`, and registers it to the active agent tool set.
 
 ### Step 3: APEX Evolutionary Loop Implementation
 
-1. **Layer 1:** In the triage loop, when the root cause is diagnosed as an ingress surge overwhelming database thread capacity, prompt Gemini 3.7 Flash to output a token-bucket rate limiter. Compile and register this limiter dynamically into the FastAPI middleware pipeline.
+1. **Layer 1:** In the triage loop, when the root cause is diagnosed as an ingress surge overwhelming database thread capacity, prompt Gemini 4.0 Argon to output a token-bucket rate limiter. Compile and register this limiter dynamically into the FastAPI middleware pipeline.
 
-2. **Layer 2:** In `app/evolution/principle_store.py`, define an in-memory vector store that indexes invariant operational principles. Store the lesson distilled by Gemini 3.7 Flash: *"Do not restart database under cache-eviction connection saturation; deploy boundary rate-limiting first."*
+2. **Layer 2:** In `app/evolution/principle_store.py`, define an in-memory vector store that indexes invariant operational principles. Store the lesson distilled by Gemini 4.0 Argon: *"Do not restart database under cache-eviction connection saturation; deploy boundary rate-limiting first."*
 
-3. **Layer 3:** In `app/evolution/topology_mutator.py`, programmatically modify the ADK agent topology. Instantiate a new `TrafficShapingAgent` (backed by `gemini-3.7-flash` with tools `set_rate_limit`, `inspect_queue_depth`) and link it to the `Supervisor` via sub-agent delegation.
+3. **Layer 3:** In `app/evolution/topology_mutator.py`, programmatically modify the ADK agent topology. Instantiate a new `TrafficShapingAgent` (backed by `gemini-4-argon` with tools `set_rate_limit`, `inspect_queue_depth`) and link it to the `Supervisor` via sub-agent delegation.
 
 ### Step 4: AgentEvolver & Dream-RSI Implementation
 
@@ -491,7 +491,7 @@ project_chrysalis/
 
 2. Implement `app/evolution/dream_rsi_replay.py`: Load the recorded incident requests into DuckDB. Run parameterized simulation queries over token leak rates ($10$ to $200\text{ req/s}$) to discover the capacity value that maximizes throughput while keeping simulated database thread lockups at zero.
 
-3. Implement `app/evolution/self_questioner.py`: Spin up an isolated shadow instance of the target environment. Prompt Gemini 3.7 Flash to formulate edge-case stress scenarios, fire a synthetic cache purge under load, and assert that the evolved multi-agent graph (with the new `TrafficShapingAgent`) handles the surge with zero `HTTP 500` errors.
+3. Implement `app/evolution/self_questioner.py`: Spin up an isolated shadow instance of the target environment. Prompt Gemini 4.0 Argon to formulate edge-case stress scenarios, fire a synthetic cache purge under load, and assert that the evolved multi-agent graph (with the new `TrafficShapingAgent`) handles the surge with zero `HTTP 500` errors.
 
 ## 11\. End-to-End Demo Script Walkthrough (`demo_runner.py`)
 
@@ -507,11 +507,11 @@ The demo runner script executes the complete 5-minute autonomous lifecycle:
 
 * **\[Phase 2: 01:00 \- 02:30\] ADK 2.0 Fast Loop Triage & APEX Layer 1 Hotpatch**
 
-  * ADK Supervisor (Gemini 3.7 Flash) queries `DiagnosticAgent`.
+  * ADK Supervisor (Gemini 4.0 Argon) queries `DiagnosticAgent`.
 
   * *Self-Navigating* memory blocks dangerous database reboot commands.
 
-  * Gemini 3.7 Flash synthesizes `TokenBucketRateLimiter` code (APEX L1).
+  * Gemini 4.0 Argon synthesizes `TokenBucketRateLimiter` code (APEX L1).
 
   * Dynamic tool registers and activates: non-critical requests are throttled into a virtual queue.
 
@@ -525,9 +525,9 @@ The demo runner script executes the complete 5-minute autonomous lifecycle:
 
     * Dynamic Rate Limiter Patch: $+0.94$ credit.
 
-  * APEX Layer 2 distills invariant principle into memory using Gemini 3.7 Flash.
+  * APEX Layer 2 distills invariant principle into memory using Gemini 4.0 Argon.
 
-  * APEX Layer 3 mutates ADK graph: introduces permanent `TrafficShapingAgent` (Gemini 3.7 Flash).
+  * APEX Layer 3 mutates ADK graph: introduces permanent `TrafficShapingAgent` (Gemini 4.0 Argon).
 
 * **\[Phase 4: 03:45 \- 05:00\] Dream-RSI Replay & Self-Questioning Verification**
 
@@ -535,4 +535,4 @@ The demo runner script executes the complete 5-minute autonomous lifecycle:
 
   * Dream-RSI runs 1,000 counterfactual parameter variations offline in $350\text{ ms}$, discovering the exact optimal capacity ($42\text{ req/s}$).
 
-  * AgentEvolver (Gemini 3.7 Flash) runs a shadow chaos probe, verifying that a subsequent cache eviction causes zero service degradation.
+  * AgentEvolver (Gemini 4.0 Argon) runs a shadow chaos probe, verifying that a subsequent cache eviction causes zero service degradation.

@@ -314,7 +314,7 @@ async def run_full_demo():
         attributions=attributions,
     )
     distilled_principle = distill_result["principle"]
-    print(f"    ADK Agent Dispatched  : principle_distiller_agent (Gemini 3.7 Flash)")
+    print(f"    ADK Agent Dispatched  : principle_distiller_agent (Gemini 4.0 Argon)")
     print(f"    Executed Tool Calls   : {[t['name'] for t in distill_result['tool_calls']]}")
     if distilled_principle:
         print(f"    Distilled Principle ID: {distilled_principle.principle_id}")
@@ -385,7 +385,7 @@ async def run_full_demo():
         f"Formulate an adversarial 'What-If?' hypothesis combining an instantaneous cache drop with a 200-request burst. "
         f"Execute `inject_shadow_cache_purge`, then `fire_shadow_concurrent_burst` with 200 requests, and finally `assert_shadow_invariant`."
     )
-    print(f"    ADK Agent Dispatched  : curiosity_chaos_agent (Gemini 3.7 Flash)")
+    print(f"    ADK Agent Dispatched  : curiosity_chaos_agent (Gemini 4.0 Argon)")
     chaos_result = await chaos_runner.run_chaos_probe(chaos_directive)
 
     print(f"\n{Style.CYAN}[>] Step 4.5: ADK Chaos Agent Autonomous Tool Execution Trace:{Style.RESET}")

@@ -1,4 +1,4 @@
-"""Curiosity Chaos Specialist Agent built with Google ADK 2.0 and Gemini 3.7 Flash."""
+"""Curiosity Chaos Specialist Agent built with Google ADK 2.0 and Gemini 4.0 Argon."""
 import asyncio
 import json
 import time
@@ -12,7 +12,7 @@ from google.genai import types
 from app.config import MODEL_NAME, LLM_MAX_ATTEMPTS
 from app.evolution.self_questioner import ShadowSandboxEnvironment
 
-CHAOS_AGENT_INSTRUCTION = """You are the Chrysalis Proactive Curiosity Chaos Specialist Agent powered by Gemini 3.7 Flash.
+CHAOS_AGENT_INSTRUCTION = """You are the Chrysalis Proactive Curiosity Chaos Specialist Agent powered by Gemini 4.0 Argon.
 Your mission is to perform automated Red Team chaos engineering on the newly evolved multi-agent architecture.
 
 Protocol:

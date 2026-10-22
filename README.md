@@ -2,7 +2,7 @@
 
 [![Google Cloud](https://img.shields.io/badge/Platform-Google%20Cloud-4285F4)](https://cloud.google.com/)
 [![Google ADK 2.0](https://img.shields.io/badge/Framework-Google%20ADK%202.0-4285F4)](https://pypi.org/project/google-adk/)
-[![Gemini 3.7 Flash](https://img.shields.io/badge/LLM-Gemini%203.7%20Flash%20(Vertex%20AI)-34A853)](https://cloud.google.com/vertex-ai)
+[![Gemini 4.0 Argon](https://img.shields.io/badge/LLM-Gemini%204.0%20Argon%20(Vertex%20AI)-34A853)](https://cloud.google.com/vertex-ai)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue)](LICENSE)
 [![Tests](https://img.shields.io/badge/Tests-71%20Passing-brightgreen)](.github/workflows/tests.yml)
@@ -14,7 +14,7 @@
 
 ![Self-Evolving AI Architecture on Google Cloud & Gemini Agent Platform](docs/self_evolving_ai_architecture.jpeg)
 
-This repository resolves the fundamental SRE trilemma (**Exploration Risk**, **Brittle Generalization**, and **Coarse Credit Assignment**) by unifying three recursive self-improvement paradigms into an extensible multi-agent framework built with **Google Agent Development Kit (ADK) 2.0** (`google-adk`) and powered by **Gemini 3.7 Flash on Vertex AI**.
+This repository resolves the fundamental SRE trilemma (**Exploration Risk**, **Brittle Generalization**, and **Coarse Credit Assignment**) by unifying three recursive self-improvement paradigms into an extensible multi-agent framework built with **Google Agent Development Kit (ADK) 2.0** (`google-adk`) and powered by **Gemini 4.0 Argon on Vertex AI**.
 
 Every LLM decision point in the system—from root triage routing to principle distillation and curiosity chaos probing—is implemented as a native Google ADK 2.0 `LlmAgent` with typed data schemas and declarative `FunctionTool`s.
 
@@ -98,7 +98,7 @@ Creates the BigQuery dataset used for Dream-RSI SQL sweeps and the Cloud KMS key
 | `GOOGLE_CLOUD_PROJECT` | gcloud / ADC project | Project for Vertex AI, Cloud Logging, BigQuery, Cloud KMS |
 | `GOOGLE_CLOUD_LOCATION` | `global` | Vertex AI location for Gemini |
 | `GOOGLE_CLOUD_REGION` | `us-central1` | Region label for governance metadata |
-| `GEMINI_MODEL` | `gemini-3.7-flash` | Model used by all ADK agents and code synthesis |
+| `GEMINI_MODEL` | `gemini-4-argon` | Model used by all ADK agents and code synthesis |
 | `CHRYSALIS_OFFLINE` | unset | `1` forces the deterministic offline fallbacks even if credentials exist |
 | `CHRYSALIS_BQ_DATASET` | `chimera_telemetry` | BigQuery dataset for Dream-RSI traces |
 
@@ -115,7 +115,7 @@ Creates the BigQuery dataset used for Dream-RSI SQL sweeps and the Cloud KMS key
 ```
 +----------------------------------------------------------------------------------------------------+
 |                                    PROJECT CHRYSALIS ARCHITECTURE                                    |
-|                   (Google ADK 2.0 Multi-Agent Framework + Gemini 3.7 Flash)                        |
+|                   (Google ADK 2.0 Multi-Agent Framework + Gemini 4.0 Argon)                        |
 +----------------------------------------------------------------------------------------------------+
                                               |
      +----------------------------------------+----------------------------------------+
@@ -245,7 +245,7 @@ python app/demo_runner.py
   - Ingests recorded request traces into an in-memory DuckDB table (`recorded_requests`).
   - Executes 400 counterfactual policy sweeps in a few milliseconds, modelling both sustained DB throughput and cold-cache burst tolerance, to select the highest-throughput policy that keeps zero 5xx and ≥15% pool headroom.
   - **The evolved topology acts:** the supervisor delegates to `TrafficShapingAgent`, whose `set_rate_limit` tool applies the Dream-RSI policy to the live limiter (verified against the limiter's actual state).
-  - AgentEvolver Curiosity Engine: Dispatches ADK `CuriosityChaosAgent` (`gemini-3.7-flash`).
+  - AgentEvolver Curiosity Engine: Dispatches ADK `CuriosityChaosAgent` (`gemini-4-argon`).
   - The chaos agent autonomously executes `inject_shadow_cache_purge`, `fire_shadow_concurrent_burst`, and verifies invariants (`assert_shadow_invariant`); the verdict (`VERIFIED_RESILIENT` / `INVARIANT_VIOLATED`) is computed from the measured shadow-sandbox errors.
 
 ---

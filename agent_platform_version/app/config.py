@@ -57,7 +57,7 @@ logging.getLogger("google_adk.google.adk.runners").addFilter(_DropAdkCacheHint()
 warnings.filterwarnings("ignore", message=r"\[EXPERIMENTAL\] feature FeatureName\.JSON_SCHEMA_FOR_FUNC_DECL")
 
 # Vertex AI Model settings
-MODEL_NAME: str = os.getenv("GEMINI_MODEL", "gemini-3.7-flash")
+MODEL_NAME: str = os.getenv("GEMINI_MODEL", "gemini-4-argon")
 EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "text-embedding-004")
 
 # Google Cloud Services configuration

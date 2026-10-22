@@ -52,8 +52,8 @@ logging.getLogger("google_adk.google.adk.runners").addFilter(_DropAdkCacheHint()
 warnings.filterwarnings("ignore", message=r"\[EXPERIMENTAL\] feature FeatureName\.JSON_SCHEMA_FOR_FUNC_DECL")
 
 # Unified LLM Model Configuration
-# Primary: Gemini 3.7 Flash on Vertex AI
-MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-3.7-flash")
+# Primary: Gemini 4.0 Argon on Vertex AI
+MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-4-argon")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-004")
 
 # Target Environment Constants (Compact Mode)

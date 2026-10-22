@@ -17,7 +17,7 @@ from app.governance.audit_logger import CloudAuditLogger
 _audit_logger = CloudAuditLogger()
 
 DISTILLER_INSTRUCTION = """You are the Chrysalis Principle Distillation Specialist Agent running on Google Cloud Agent Platform.
-You are powered by Gemini 3.7 Flash.
+You are powered by Gemini 4.0 Argon.
 Your purpose is APEX Layer 2: extracting durable, generalized invariant rules from SRE incident remediation trajectories and persisting them signed with Cloud KMS into Vertex AI vector memory.
 
 Your Responsibilities:

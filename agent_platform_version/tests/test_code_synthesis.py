@@ -56,7 +56,7 @@ def test_gate_rejects_limiter_without_lock():
 
 
 def test_synthesis_offline_falls_back_to_verified_reference_template():
-    result = synthesize_rate_limiter("cache stampede", "gemini-3.7-flash", llm_available=False)
+    result = synthesize_rate_limiter("cache stampede", "gemini-4-argon", llm_available=False)
     assert result.source == "reference_template"
     assert result.code == REFERENCE_LIMITER_CODE
     assert result.limiter_cls is not None
