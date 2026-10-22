@@ -9,7 +9,7 @@
 This edition of Project Chrysalis layers an enterprise **Security & Governance Control Plane** around the **Google ADK 2.0 Multi-Agent Framework** and **Gemini 3.7 Flash on Vertex AI** (in your own GCP project), and integrates real Google Cloud services where it matters for the self-evolution loop: Gemini-synthesized hotpatches signed with **Cloud KMS**, Dream-RSI counterfactual sweeps executed as SQL in **BigQuery**, and audit/telemetry streamed to **Cloud Logging**.
 
 > 📖 **Read the Full Google Cloud Blog Post:**  
-> For an intuitive, end-to-end breakdown of Self-Evolving AI, Recursive Self-Improvement (RSI), the Black Friday SRE use case, cloud architecture, and mathematical attribution formulas, see [docs/google_cloud_blog_project_chrysalis_rsi.md](../docs/google_cloud_blog_project_chrysalis_rsi.md).
+> For an intuitive, end-to-end breakdown of Self-Evolving AI, Recursive Self-Improvement (RSI), the Black Friday SRE use case, cloud architecture, and mathematical attribution formulas, see [Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform](https://developers.googleblog.com/architecting-governed-self-evolving-ai-agents-on-gemini-agent-platform).
 
 ![Self-Evolving AI Architecture on Google Cloud & Gemini Agent Platform](../docs/self_evolving_ai_architecture.jpeg)
 

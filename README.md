@@ -8,7 +8,7 @@
 [![Tests](https://img.shields.io/badge/Tests-71%20Passing-brightgreen)](.github/workflows/tests.yml)
 
 > 📖 **Google Cloud Blog Post & Enterprise Agent Platform Edition:**  
-> - **Blog Post:** [Self-Evolving AI: Architecting Resilient Cloud Systems with Recursive Self-Improvement](docs/google_cloud_blog_project_chrysalis_rsi.md)  
+> - **Blog Post:** [Architecting Governed, Self-Evolving AI Agents on Gemini Enterprise Agent Platform](https://developers.googleblog.com/architecting-governed-self-evolving-ai-agents-on-gemini-agent-platform)  
 > - **Architecture Specification:** [docs/architecture_specification.md](docs/architecture_specification.md)  
 > - **Google Cloud Agent Platform Edition (Recommended):** [`agent_platform_version/`](agent_platform_version/README.md) — Gemini-synthesized hotpatches behind sandbox gates, Cloud KMS code signing + Binary Authorization, Policy-as-Code controller, a Tier-2 dual-custody Human-in-the-Loop (HITL) approval modal, and BigQuery Dream-RSI counterfactual sweeps.
 
@@ -166,7 +166,6 @@ chrysalis/
 │   ├── setup_gcp.sh                    # Provision BigQuery dataset + Cloud KMS signing key (idempotent)
 │   └── teardown_gcp.sh                 # Remove the dataset and destroy the KMS key version
 ├── docs/
-│   ├── google_cloud_blog_project_chrysalis_rsi.md  # Full Google Cloud Technical Blog Post
 │   ├── architecture_specification.md             # Technical architecture & implementation specification
 │   ├── self_evolving_ai_architecture.jpeg        # Google Cloud Reference Architecture Diagram
 │   └── self_evolving_ai_architecture.svg         # Vector version of the architecture diagram
